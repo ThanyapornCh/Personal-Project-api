@@ -36,6 +36,13 @@ module.exports = (sequelize, DataTypes) => {
       },
       profileImage: DataTypes.STRING,
       coverImage: DataTypes.STRING,
+      role: {
+        type: DataTypes.ENUM(['user', 'admin']),
+        allowNull: false,
+        validate: {
+          notEmpty: true,
+        },
+      },
     },
     {
       underscored: true,
