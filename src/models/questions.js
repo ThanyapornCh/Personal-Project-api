@@ -1,20 +1,42 @@
 module.exports = (sequelize, DataTypes) => {
-  const Question = sequelize.define('Question', {
-    DataPersonal: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: true,
+  const Question = sequelize.define(
+    'Question',
+    {
+      DataPersonal: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: true,
+        },
+      },
+      questionType: {
+        type: DataTypes.ENUM(['checkSkinType', 'skinCareProduct']),
+        allowNull: false,
+        validate: {
+          notEmpty: true,
+        },
       },
     },
-    questionType: {
-      type: DataTypes.ENUM(['checkSkinType', 'skinCareProduct']),
-      allowNull: false,
-      validate: {
-        notEmpty: true,
-      },
-    },
-  });
+    {
+      underscored: true,
+    }
+  );
 
+  Question.associate = db => {
+    Question.belongsTo(db.User, {
+      foreignKey: {
+        name: 'userId',
+        allowNull: 'false',
+      },
+      onDelete: 'RESTRICT',
+    }),
+      Question.hasMany(db.Answer, {
+        foreignKey: {
+          name: 'questionId',
+          allowNull: 'false',
+        },
+        onDelete: 'RESTRICT',
+      });
+  };
   return Question;
 };

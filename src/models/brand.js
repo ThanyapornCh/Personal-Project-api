@@ -1,34 +1,50 @@
 module.exports = (sequelize, DataTypes) => {
-  const Brand = sequelize.define('Brand', {
-    laneige: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: true,
+  const Brands = sequelize.define(
+    'Brands',
+    {
+      laneige: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: true,
+        },
+      },
+      innisfree: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: true,
+        },
+      },
+      anessa: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: true,
+        },
+      },
+      etude: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: true,
+        },
       },
     },
-    innisfree: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: true,
-      },
-    },
-    anessa: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: true,
-      },
-    },
-    etude: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: true,
-      },
-    },
-  });
+    {
+      underscored: true,
+    }
+  );
 
-  return Brand;
+  Brands.associate = db => {
+    Brands.belongsTo(db.Products, {
+      foreignKey: {
+        name: ' productId',
+        allowNull: false,
+      },
+      onDelete: 'RESTRICT',
+    });
+  };
+
+  return Brands;
 };

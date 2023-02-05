@@ -36,9 +36,11 @@ module.exports = (sequelize, DataTypes) => {
       },
       profileImage: DataTypes.STRING,
       coverImage: DataTypes.STRING,
+
       role: {
         type: DataTypes.ENUM(['user', 'admin']),
         allowNull: false,
+        defaultValue: 'user',
         validate: {
           notEmpty: true,
         },
@@ -48,6 +50,23 @@ module.exports = (sequelize, DataTypes) => {
       underscored: true,
     }
   );
+
+  User.associate = db => {
+    User.hasMany(db.Question, {
+      foreignKey: {
+        name: 'userId',
+        allowNull: false,
+      },
+      onDelete: 'RESTRICT',
+    }),
+      User.hasMany(db.Orders, {
+        foreignKey: {
+          name: 'userId',
+          allowNull: false,
+        },
+        onDelete: 'RESTRICT',
+      });
+  };
 
   // User.associate = db => {
   //   User.hasMany(db.Post, {
