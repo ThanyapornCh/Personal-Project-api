@@ -6,6 +6,7 @@ const { User } = require('../models');
 const { Op } = require('sequelize');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const createError = require('../utils/create-error');
 
 exports.register = async (req, res, next) => {
   try {
