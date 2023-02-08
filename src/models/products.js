@@ -44,14 +44,14 @@ module.exports = (sequelize, DataTypes) => {
       },
       onDelete: 'RESTRICT',
     }),
-      Products.hasMany(db.Categories, {
+      Products.belongsTo(db.Categories, {
         foreignKey: {
-          name: 'categoriesId',
+          name: 'categoryId',
           allowNull: false,
         },
         onDelete: 'RESTRICT',
       }),
-      Products.hasMany(db.Brands, {
+      Products.belongsTo(db.Brands, {
         foreignKey: {
           name: 'brandId',
           allowNull: false,

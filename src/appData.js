@@ -1,4 +1,4 @@
-// const {User,Product, sequelize} = require('./models')
+// const {Question sequelize} = require('./models')
 // const bcrypt = require('bcryptjs')
 
 // let productData = [

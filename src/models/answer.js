@@ -2,41 +2,8 @@ module.exports = (sequelize, DataTypes) => {
   const Answer = sequelize.define(
     'Answer',
     {
-      skinTypes: {
-        type: DataTypes.ENUM([
-          'drySkin',
-          'combinationSkin',
-          'oilySkin',
-          'sensitiveSkin',
-        ]),
-        allowNull: false,
-        validate: {
-          notEmpty: true,
-        },
-      },
-      facialSkinProblems: {
-        type: DataTypes.ENUM([
-          'acne',
-          'melasma',
-          'blemish',
-          'wrinkles',
-          'darkCircles',
-          'pore',
-        ]),
-        allowNull: false,
-        validate: {
-          notEmpty: true,
-        },
-      },
-      skinCare: {
-        type: DataTypes.ENUM([
-          'facialCleanser',
-          'serum',
-          'moisturizer',
-          'eyeCream',
-          'sunscreen',
-          'sleepingMask',
-        ]),
+      answer: {
+        type: DataTypes.STRING,
         allowNull: false,
         validate: {
           notEmpty: true,
@@ -52,6 +19,13 @@ module.exports = (sequelize, DataTypes) => {
     Answer.belongsTo(db.Question, {
       foreignKey: {
         name: 'questionId',
+        allowNull: false,
+      },
+      onDelete: 'RESTRICT',
+    });
+    Answer.belongsTo(db.User, {
+      foreignKey: {
+        name: 'userId',
         allowNull: false,
       },
       onDelete: 'RESTRICT',

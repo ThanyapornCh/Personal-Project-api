@@ -52,20 +52,13 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   User.associate = db => {
-    User.hasMany(db.Question, {
+    User.hasMany(db.Orders, {
       foreignKey: {
         name: 'userId',
         allowNull: false,
       },
       onDelete: 'RESTRICT',
-    }),
-      User.hasMany(db.Orders, {
-        foreignKey: {
-          name: 'userId',
-          allowNull: false,
-        },
-        onDelete: 'RESTRICT',
-      });
+    });
   };
 
   // User.associate = db => {

@@ -2,28 +2,7 @@ module.exports = (sequelize, DataTypes) => {
   const Brands = sequelize.define(
     'Brands',
     {
-      laneige: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: true,
-        },
-      },
-      innisfree: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: true,
-        },
-      },
-      anessa: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: true,
-        },
-      },
-      etude: {
+      name: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
@@ -37,9 +16,9 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   Brands.associate = db => {
-    Brands.belongsTo(db.Products, {
+    Brands.hasMany(db.Products, {
       foreignKey: {
-        name: ' productId',
+        name: ' brandId',
         allowNull: false,
       },
       onDelete: 'RESTRICT',

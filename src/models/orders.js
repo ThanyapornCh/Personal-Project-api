@@ -39,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
     }),
       Orders.hasMany(db.OrderItems, {
         foreignKey: {
-          name: 'orderitemsId',
+          name: 'ordersId',
           allowNull: false,
         },
         onDelete: 'RESTRICT',
