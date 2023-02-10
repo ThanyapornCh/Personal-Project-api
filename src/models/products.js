@@ -46,7 +46,7 @@ module.exports = (sequelize, DataTypes) => {
     }),
       Products.belongsTo(db.Categories, {
         foreignKey: {
-          name: 'categoryId',
+          name: 'categoriesId',
           allowNull: false,
         },
         onDelete: 'RESTRICT',
