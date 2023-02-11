@@ -3,11 +3,11 @@ const cloudinary = require('../utils/cloudinary');
 const fs = require('fs');
 exports.addProducts = async (req, res, next) => {
   try {
-    //   console.log(req.body);
-    //   const { productName, productPrice, productImage, productDescription } =
-    //     req.body;
+    // console.log(req.body);
+    // const { productName, productPrice, productImage, productDescription } =
+    //   req.body;
 
-    //   console.log(productName, productPrice, productDescription, req.file.path);
+    // console.log(productName, productPrice, productDescription, req.file.path);
     const url = await cloudinary.upload(req.file.path);
     console.log(url);
     const value = {
