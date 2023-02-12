@@ -11,7 +11,7 @@ router.post(
   productsController.addProducts
 );
 
-router.get('/allproducts', authenticate, productsController.getAllProducts);
+router.get('/allproducts', productsController.getAllProducts);
 router.get('/addcategories', productsController.getAllCategories);
 router.get('/addbrand', productsController.getAllBrand);
 
