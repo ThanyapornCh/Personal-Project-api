@@ -8,6 +8,8 @@ exports.addProducts = async (req, res, next) => {
     //   req.body;
 
     // console.log(productName, productPrice, productDescription, req.file.path);
+
+    console.log(req.file.path);
     const url = await cloudinary.upload(req.file.path);
     console.log(url);
     const value = {
@@ -18,6 +20,7 @@ exports.addProducts = async (req, res, next) => {
       brandId: req.body.brandId,
       categoriesId: req.body.categoriesId,
     };
+    console.log(value);
     const products = await Products.create(value);
     // const answer = await answer.create(value);
     res.status(201).json({ products });

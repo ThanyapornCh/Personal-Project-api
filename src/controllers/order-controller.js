@@ -97,3 +97,88 @@ exports.getOrder = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.deleteOrder = async (req, res, next) => {
+  const { ordersId, productId } = req.params;
+
+  try {
+    const totalDelete = await OrderItems.destroy({
+      where: {
+        productId: +productId,
+        ordersId: +ordersId,
+      },
+    });
+    console.log(totalDelete);
+    if (totalDelete === 0) {
+      createError('Your cart is empty');
+    }
+    res.status(204).json({ messgae: 'Delete order complete' });
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.getAllOrder = async (req, res, next) => {
+  const orders = await Orders.findOne({
+    where: {
+      userId: req.user.id,
+      orderStatus: 'cart',
+    },
+    include: {
+      model: OrderItems,
+      include: {
+        model: Products,
+      },
+    },
+  });
+  res.status(200).json({ orders });
+};
+
+exports.updateOrder = async (req, res, next) => {
+  const { orderItemsId } = req.params;
+  const { methode } = req.body;
+  const orderItems = await OrderItems.findOne({
+    where: {
+      id: Number(orderItemsId),
+    },
+  });
+  if (methode === 'add') {
+    await OrderItems.increment(
+      { productQuantity: 1 },
+      {
+        where: {
+          id: Number(orderItemsId),
+        },
+      }
+    );
+  } else if (methode === 'minus' && orderItems.productQuantity > 0) {
+    await OrderItems.decrement(
+      { productQuantity: 1 },
+      {
+        where: {
+          id: Number(orderItemsId),
+        },
+      }
+    );
+  }
+  const unpaidorder = await Orders.findOne({
+    where: {
+      userId: req.user.id,
+      orderStatus: 'cart',
+    },
+    include: {
+      model: OrderItems,
+      include: {
+        model: Products,
+      },
+    },
+  });
+  res.status(200).json({ order: unpaidorder });
+
+  // const upstatus = await OrderItems.findAll({
+  //   where: {
+  //     productQuantity: Number(count),
+
+  //   }
+  // })
+};
