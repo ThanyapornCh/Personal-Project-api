@@ -11,6 +11,12 @@ router.post(
   productsController.addProducts
 );
 
+router.post(
+  '/updateProducts',
+  upload.single('productImage'),
+  productsController.updateProducts
+);
+
 router.get('/allproducts', productsController.getAllProducts);
 router.get('/addcategories', productsController.getAllCategories);
 router.get('/addbrand', productsController.getAllBrand);

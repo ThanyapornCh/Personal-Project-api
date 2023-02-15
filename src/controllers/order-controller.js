@@ -68,7 +68,7 @@ exports.getOrder = async (req, res, next) => {
             },
           }
         );
-        //ถ้ายังไม่มีในตะกร้าสินค้าให้สร้างใหม่
+        //ถ้ายังไม่มีในตะกร้าสินค้า
       } else {
         await OrderItems.create({
           productPrice: product.productPrice,

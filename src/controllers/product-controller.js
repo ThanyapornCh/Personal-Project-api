@@ -47,3 +47,12 @@ exports.getAllBrand = async (req, res, next) => {
   console.log(brand);
   res.status(200).json({ brand });
 };
+
+exports.updateProducts = async (req, res, next) => {
+  try {
+    const updateurl = await cloudinary.upload(req.file.path);
+    console.log(updateurl);
+  } catch (err) {
+    next(err);
+  }
+};
