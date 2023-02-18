@@ -35,6 +35,7 @@ exports.addProducts = async (req, res, next) => {
 };
 
 exports.getAllProducts = async (req, res, next) => {
+  console.log('kuyy');
   const products = await Products.findAll();
   res.status(200).json({ products });
 };
@@ -59,7 +60,7 @@ exports.updateProducts = async (req, res, next) => {
     const obj = Object.assign({}, req.body);
     console.log(obj);
     const {
-      productId,
+      id,
       productName,
       productImage,
       productQuantity,
@@ -75,10 +76,26 @@ exports.updateProducts = async (req, res, next) => {
         productPrice,
         productDescription,
       },
-      { where: { id: Number(productId) } }
+      { where: { id } }
     );
     console.log(updateproduct);
     res.status(200).json({ message: 'Update product to be success' });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.deleteProducts = async (req, res, next) => {
+  try {
+    const { productId } = req.params;
+
+    const totalDeleteProduct = await Products.destroy({
+      where: {
+        id: Number(productId),
+      },
+    });
+    console.log(totalDeleteProduct);
+    res.status(204).json({ message: 'Delete Product to be success' });
   } catch (err) {
     next(err);
   }
