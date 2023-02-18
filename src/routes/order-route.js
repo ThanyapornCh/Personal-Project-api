@@ -7,11 +7,11 @@ const orderController = require('../controllers/order-controller');
 router.post('/:productId', authenticate, orderController.getOrder);
 router.get('/', authenticate, orderController.getAllOrder);
 router.put('/:orderItemsId', authenticate, orderController.updateOrder);
-router.post(
-  '/:orderId/userId/:userId',
-  upload.single('slipUrl'),
-  orderController.uploadSlip
-);
+// router.post(
+//   '/:orderId/userId/:userId',
+//   upload.single('slipUrl'),
+//   orderController.uploadSlip
+// );
 
 router.delete(
   '/:ordersId/product/:productId',

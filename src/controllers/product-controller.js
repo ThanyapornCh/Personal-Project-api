@@ -1,6 +1,7 @@
 const { Products, Categories, Brands } = require('../models');
 const cloudinary = require('../utils/cloudinary');
 const fs = require('fs');
+const { url } = require('inspector');
 exports.addProducts = async (req, res, next) => {
   try {
     // console.log(req.body);
@@ -52,6 +53,32 @@ exports.updateProducts = async (req, res, next) => {
   try {
     const updateurl = await cloudinary.upload(req.file.path);
     console.log(updateurl);
+    //หยิบ โปรดัคที่จะอัพเดทมาจากบอดี้ แล้ว ก็แอซซายเข้าตัวแปร
+    // เอาไปเซฟลงดาต้าเบส
+    // ส่งเรสป้อนคืน ว่าอัพเดทสำเร็จ
+    const obj = Object.assign({}, req.body);
+    console.log(obj);
+    const {
+      productId,
+      productName,
+      productImage,
+      productQuantity,
+      productPrice,
+      productDescription,
+    } = Object.assign({}, req.body);
+
+    const updateproduct = await Products.update(
+      {
+        productName,
+        productImage,
+        productQuantity,
+        productPrice,
+        productDescription,
+      },
+      { where: { id: Number(productId) } }
+    );
+    console.log(updateproduct);
+    res.status(200).json({ message: 'Update product to be success' });
   } catch (err) {
     next(err);
   }
