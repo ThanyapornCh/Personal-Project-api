@@ -2,6 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 const authenticate = require('../middlewares/authenticate');
+const adminAuthenticate = require('../middlewares/admin-authenticate');
 
 const productsController = require('../controllers/product-controller');
 const upload = require('../middlewares/upload');
@@ -20,6 +21,10 @@ router.post(
 router.get('/allproducts', productsController.getAllProducts);
 router.get('/addcategories', productsController.getAllCategories);
 router.get('/addbrand', productsController.getAllBrand);
-router.delete('/:productId', authenticate, productsController.deleteProducts);
+router.delete(
+  '/:productId',
+  adminAuthenticate,
+  productsController.deleteProducts
+);
 
 module.exports = router;
