@@ -35,7 +35,7 @@ exports.addProducts = async (req, res, next) => {
 };
 
 exports.getAllProducts = async (req, res, next) => {
-  console.log('kuyy');
+  console.log('Bridge Bar');
   const products = await Products.findAll();
   res.status(200).json({ products });
 };
