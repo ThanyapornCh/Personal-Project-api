@@ -13,8 +13,7 @@ exports.uploadSlip = async (req, res, next) => {
         orderStatus: 'cart',
       },
     });
-    // console.log(order);
-    // console.log('req.file', req.file);
+
     const url = await cloudinary.upload(req.file.path);
     console.log(url);
     const value = { slipUrl: url, orderStatus: 'paid' };

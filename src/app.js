@@ -13,6 +13,7 @@ const authRoute = require('./routes/user-route');
 const surveyRoute = require('./routes/surveying-route');
 const productsRoute = require('./routes/product-route');
 const orderRoute = require('./routes/order-route');
+const adminRoute = require('./routes/admin-route');
 const app = express();
 
 app.use(cors());
@@ -25,6 +26,7 @@ app.use('/surveying', surveyRoute);
 app.use('/products', productsRoute);
 
 app.use('/order', orderRoute);
+app.use('/admin', adminRoute);
 
 app.use(notFoundMiddlleware);
 app.use(errorMiddleware);
