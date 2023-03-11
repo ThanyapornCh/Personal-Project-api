@@ -16,5 +16,6 @@ router.post(
   upload.single('slipUrl'),
   userUploadController.uploadSlip
 );
+router.get('/billUser', authenticate, userUploadController.getAllBill);
 
 module.exports = router;

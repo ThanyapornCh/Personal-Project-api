@@ -33,6 +33,19 @@ exports.uploadSlip = async (req, res, next) => {
   }
 };
 exports.getAllBill = async (req, res, next) => {
-  const orders = await Orders.findAll();
-  res.status(200).json({ orders });
+  try {
+    const userId = req.user.id;
+    console.log(userId);
+    const billOrder = await Orders.findOne({
+      where: {
+        orderStatus: 'paid',
+        userId: userId,
+      },
+    });
+    console.log(billOrder);
+
+    res.status(200).json({ message: 'Show bill for customer', billOrder });
+  } catch (err) {
+    next(err);
+  }
 };
