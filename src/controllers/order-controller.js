@@ -182,3 +182,18 @@ exports.updateOrder = async (req, res, next) => {
   //   }
   // })
 };
+
+exports.getAllOrderStatus = async (req, res, next) => {
+  try {
+    const checkOrder = await Orders.findAll();
+    res
+      .status(200)
+      .json({ message: 'Show order staus to be success', checkOrder });
+  } catch (err) {
+    next(err);
+  }
+};
+
+// console.log(checkOrder);
+//แอดมินสามารถดูสถานะ cart กับ paid ของ userทุกคน
+// ถ้า user จ่ายเเล้วให้ขึ้นสถานะเป็น paid และถ้า  user ยังไม่ชำระเงินให้ขึ้นสถานะ cart
