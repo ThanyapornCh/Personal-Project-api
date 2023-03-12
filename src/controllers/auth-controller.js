@@ -63,3 +63,10 @@ exports.login = async (req, res, next) => {
     next(err);
   }
 };
+// exports.logout = async (req,res,next) => {
+//   try{
+//         const accessToken = jwt .sigh
+//   } catch(err) {
+//     next(err)
+//   }
+// }
