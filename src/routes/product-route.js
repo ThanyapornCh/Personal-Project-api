@@ -21,10 +21,6 @@ router.post(
 router.get('/allproducts', productsController.getAllProducts);
 router.get('/addcategories', productsController.getAllCategories);
 router.get('/addbrand', productsController.getAllBrand);
-router.delete(
-  '/:productId',
-  adminAuthenticate,
-  productsController.deleteProducts
-);
+router.delete('/:productId', authenticate, productsController.deleteProducts);
 
 module.exports = router;

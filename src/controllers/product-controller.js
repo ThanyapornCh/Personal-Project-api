@@ -1,7 +1,6 @@
 const { Products, Categories, Brands } = require('../models');
 const cloudinary = require('../utils/cloudinary');
 const fs = require('fs');
-const { url } = require('inspector');
 exports.addProducts = async (req, res, next) => {
   try {
     // console.log(req.body);
